@@ -20,7 +20,6 @@ const customerSchema = new Schema({
   },
   phoneNumber: {
     type: Number,
-    default: null,
     trim: true
   }
 }, { timestamps: true });
