@@ -10,6 +10,8 @@ const customerSchema = new Schema({
   age: {
     type: String,
     default: 20,
+    required: true,
+    trim: true,
     validate(age) {
       if (age < 0) {
         throw new Error('Customer age invalid');
@@ -17,8 +19,9 @@ const customerSchema = new Schema({
     }
   },
   phoneNumber: {
-    type: String,
-    default: null
+    type: Number,
+    default: null,
+    trim: true
   }
 }, { timestamps: true });
 

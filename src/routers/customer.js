@@ -7,7 +7,7 @@ const handleError = require('../utils/handle-error');
 router.get('/customers', async (req, res) => {
   try {
     const customers = await Customer.find();
-    res.send(customers);
+    res.send({ customers });
   } catch (error) {
     handleError(res, 500, error);
   }
@@ -29,7 +29,7 @@ router.post('/customers', async (req, res) => {
   const customer = new Customer(req.body);
   try {
     await customer.save();
-    res.send(customer);
+    res.send({ customer });
   } catch (error) {
     handleError(res, 400, error);
   }
@@ -50,7 +50,7 @@ router.patch('/customers/:id', async (req, res) => {
     if (!customer) return handleError(res, 404, { message: 'Not found Customer' });
     updates.forEach(update => customer[update] = req.body[update]);
     await customer.save();
-    res.send(customer);
+    res.send({ customer });
   } catch (error) {
     handleError(res, 400, error);
   }
@@ -61,7 +61,7 @@ router.delete('/customers/:id', async (req, res) => {
   try {
     const customer = await Customer.findOneAndDelete({ _id: req.params.id});
     if (!customer) return handleError(res, 404, { message: 'Not found Customer' });
-    res.send(customer);
+    res.send({ customer });
   } catch (error) {
     handleError(res, 400, error);
   }
